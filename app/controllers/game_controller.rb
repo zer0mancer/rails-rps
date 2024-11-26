@@ -1,34 +1,36 @@
 class GameController < ApplicationController
 
+
+
   def play_rock_paper_scissors(player_choice)
-    play = ["rock", "paper", "scissors"]
+    play = ["rocks", "papers", "scissors"]
     @computer_choice = play.sample
   
     if player_choice == @computer_choice
-      result = "We tied"
-    elsif (player_choice == "rock" && @computer_choice == "scissors") ||
-          (player_choice == "paper" && @computer_choice == "rock") ||
-          (player_choice == "scissors" && @computer_choice == "paper")
-      result = "We won"
-    elsif choices.include?(player_choice)
-      result = "We lost"
+      results = "We tied"
+    elsif (player_choice == "rocks" && @computer_choice == "scissors") ||
+          (player_choice == "papers" && @computer_choice == "rocks") ||
+          (player_choice == "scissors" && @computer_choice == "papers")
+      results = "We won"
+    elsif play.include?(player_choice)
+      results = "We lost"
     else
-      result = "Invalid choice. Please choose Rock, Paper, or Scissors."
+      results = "Invalid choice. Please choose Rock, Paper, or Scissors."
     end
   
-    return result 
+    return results 
   end
   
 
   def rocks
-    @player_choice = "rock"
+    @player_choice = "rocks"
   
     @results = play_rock_paper_scissors(@player_choice)
     render( {:template => "game_templates/rocks"})
   end
 
   def papers
-    @player_choice = "paper"
+    @player_choice = "papers"
   
    @results = play_rock_paper_scissors(@player_choice)
     render({ :template => "game_templates/papers"})
@@ -39,6 +41,10 @@ class GameController < ApplicationController
 
     @results = play_rock_paper_scissors(@player_choice)
     render({ :template => "game_templates/scissors"})
+  end
+
+  def homepage
+    render({:template => "layouts/homepage"})
   end
 
 end
